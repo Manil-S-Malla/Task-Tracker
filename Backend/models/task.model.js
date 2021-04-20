@@ -12,6 +12,8 @@ const taskSchema = new Schema({
     softDeadline: Date,
     hardDeadline: Date,
     finishedDate: Date,
+    status: mongoose.ObjectId,
+    user: mongoose.ObjectId,
 }, {
     timestamps: true,   //  Adds createdAt and modifiedAt fields
 });
