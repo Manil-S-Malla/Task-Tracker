@@ -10,8 +10,8 @@ const statusSchema = new Schema({
         maxlength: [32, "Status name must be 32 characters at maximum."],
     },
     description: String,
-    familyname: Schema.Types.Mixed,         //  Either this,
-    // familyname: mongoose.Mixed,           //  Or this.
+    style: Schema.Types.Mixed,         //  Either this,
+    // style: mongoose.Mixed,           //  Or this.
    
     
 }, {
