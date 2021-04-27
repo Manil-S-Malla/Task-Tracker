@@ -7,6 +7,7 @@ require('dotenv').config(); //  To have the 'environment variables' in the '.env
 
 const usersRouter = require('./routes/user.routes');
 const statusRouter = require('./routes/status.routes');
+const taskRouter = require('./routes/task.routes');
 
 //  Creating Express Server
 const app = express();
@@ -50,6 +51,7 @@ app.use(express.json());    //  Originally >app.use(bodyParser.json());< but now
 
 app.use('/users', usersRouter);
 app.use('/status', statusRouter);
+app.use('/task', taskRouter);
 
 
 //  Function to start Server and listen to port no PORT.
