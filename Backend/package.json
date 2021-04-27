@@ -1,0 +1,34 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "THe backend of task tracker.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Manil-S-Malla/Task-Tracker.git"
+  },
+  "keywords": [
+    "Backend",
+    "MongoDB",
+    "Mongoose",
+    "Express",
+    "Node",
+    "TaskTracker"
+  ],
+  "author": "Manil S. Malla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Manil-S-Malla/Task-Tracker/issues"
+  },
+  "homepage": "https://github.com/Manil-S-Malla/Task-Tracker#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.3",
+    "nodemon": "^2.0.7"
+  }
+}
