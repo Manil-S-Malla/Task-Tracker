@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 
 require('dotenv').config(); //  To have the 'environment variables' in the '.env' file.
 
-// const exercisesRouter = require('./routes/exercises');
-// const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/user.routes');
+const statusRouter = require('./routes/status.routes');
 
 //  Creating Express Server
 const app = express();
@@ -48,8 +48,9 @@ connection.once('open', () => {
 app.use(cors());
 app.use(express.json());    //  Originally >app.use(bodyParser.json());< but now is included in express.
 
-// app.use('/exercises', exercisesRouter);
-// app.use('/users', usersRouter);
+app.use('/users', usersRouter);
+app.use('/status', statusRouter);
+
 
 //  Function to start Server and listen to port no PORT.
 app.listen(PORT, () => {
