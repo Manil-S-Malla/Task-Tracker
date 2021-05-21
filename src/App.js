@@ -2,11 +2,18 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import TaskCard from './components/TaskCard.component';
+
+import {ThemeProvider } from '@material-ui/core/styles';
+import {mainTheme} from './components/shared/Theme'
+
+
 function App() {
   return(
-    <React.Fragment>
-      <h1>Hello World</h1>
-  </React.Fragment>
+    <ThemeProvider theme= {mainTheme}>
+      <TaskCard title= "Jogging"/>
+    </ThemeProvider>
+      
   )
 }
 
