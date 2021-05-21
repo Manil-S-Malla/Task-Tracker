@@ -1,10 +1,21 @@
-import {TaskCardMaxWidth as maxWidth} from '../shared/CONST';
+import { makeStyles } from '@material-ui/core/styles';
+import { lightBlue, blue } from '@material-ui/core/colors';
 
-const Style = {    
+const Styles = makeStyles(() => ({
     title: {
         margin: 5,
-    }
+    },
 
-}
+    avatar: {
+        color: '#fff',
+        backgroundColor: lightBlue[500],
+    },
 
-export default Style;
+    headerButtons: {
+        marginLeft: 'auto',
+    },
+
+    
+}))
+
+export default Styles;
