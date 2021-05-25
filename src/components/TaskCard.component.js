@@ -20,7 +20,6 @@ import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
 import {twoButtonTheme} from './Shared/Theme'
 
-import {TaskCardMaxWidth as maxWidth} from './Shared/CONST';
 
 const useStyles = makeStyles((theme) => ({          //  For styling Material UI components.
     root: {

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { lightBlue, blue } from '@material-ui/core/colors';
+import { lightBlue } from '@material-ui/core/colors';
 
 const Styles = makeStyles(() => ({
     title: {

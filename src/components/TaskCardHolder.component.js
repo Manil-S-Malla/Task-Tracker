@@ -13,7 +13,6 @@ const TaskCardHolder = (props) => {
                 margin: 10,
             }}
         >
-           {console.log(props.children)}
            {props.children}
         </div>
     )
