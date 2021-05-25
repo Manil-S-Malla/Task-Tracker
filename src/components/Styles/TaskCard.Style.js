@@ -1,4 +1,4 @@
-import {TaskCardMaxWidth as maxWidth} from '../shared/CONST';
+import {TaskCardMaxWidth as maxWidth} from '../Shared/CONST';
 
 const Style = {    
     cardHeader: {

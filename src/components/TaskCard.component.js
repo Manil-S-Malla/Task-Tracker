@@ -18,14 +18,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
-import {twoButtonTheme} from './shared/Theme'
+import {twoButtonTheme} from './Shared/Theme'
 
-import {TaskCardMaxWidth as maxWidth} from './shared/CONST';
+import {TaskCardMaxWidth as maxWidth} from './Shared/CONST';
 
 const useStyles = makeStyles((theme) => ({          //  For styling Material UI components.
     root: {
-        maxWidth: maxWidth,
-        margin: "5px 5px",
+        margin: 10,
     },
 
     expand: {

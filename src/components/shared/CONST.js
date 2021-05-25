@@ -1,1 +1,3 @@
-export const TaskCardMaxWidth = 290;
+export const TaskCardMaxWidth = 270;
+export const TaskCardHolderMaxWidth = '30%';
+
