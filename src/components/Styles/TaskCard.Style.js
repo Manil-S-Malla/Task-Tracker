@@ -1,6 +1,26 @@
 import {TaskCardMaxWidth as maxWidth} from '../Shared/CONST';
 
-const Style = {    
+const Styles = {          //  For styling Material UI components.
+    root: {
+        margin: 10,
+    },
+
+    expand: {
+        transform: 'rotate(0deg)',
+        margin: 'auto',
+        transition: 'transform 1s',
+    },
+
+    expanded: {
+        transform: 'rotate(-180deg)',
+        margin: 'auto',
+        transition: 'transform 1s',
+    },
+
+    cardActions: {
+        justifyContent: 'space-between',
+    },
+
     cardHeader: {
         display: 'flex',
         marginTop: 20,
@@ -16,11 +36,12 @@ const Style = {
         flexDirection: 'column',
         width: .68 * maxWidth,
         overflowWrap: 'break-word',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        fontSize: 12,
     },
 
     cardTitle: {
-        fontSize: 19,
+        fontSize: 15,
     },
 
     cardSubTitle: {
@@ -34,7 +55,6 @@ const Style = {
         flexDirection : 'column',
         justifyContent: 'flex-end',
     },
+};
 
-}
-
-export default Style;
+export default Styles;

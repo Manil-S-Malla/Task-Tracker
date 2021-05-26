@@ -1,8 +1,9 @@
 import React from 'react';
 import {useState} from 'react';
 
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import Style from './Styles/TaskCard.Style';
+import { ThemeProvider } from '@material-ui/core/styles';
+import Styles from './Styles/TaskCard.Style';
+import {twoButtonTheme} from './Shared/Theme';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,63 +12,36 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import Collapse from '@material-ui/core/Collapse';
 
-//import { red, blue } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
-import {twoButtonTheme} from './Shared/Theme'
 
 
-const useStyles = makeStyles((theme) => ({          //  For styling Material UI components.
-    root: {
-        margin: 10,
-    },
-
-    expand: {
-        transform: 'rotate(0deg)',
-        margin: 'auto',
-        transition: 'transform 1s',
-    },
-
-    expanded: {
-        transform: 'rotate(-180deg)',
-        margin: 'auto',
-        transition: 'transform 1s',
-    },
-
-    cardActions: {
-        justifyContent: 'space-between',
-    }
-}));
-
-
-const TaskCard = (props) => {
-    const styles = useStyles();
-    
+const TaskCard = (props) => {    
     const [expanded, setExpanded] = useState(false);
     const handleExpand = () => {
         setExpanded(!expanded);
     };
 
     return (
-        <Card className={styles.root}>
-            <div style= {Style.cardHeader}>
-                <div style={Style.headerText}>
-                    <Typography style= {Style.cardTitle}>{props.title}</Typography>
-                    <div style= {Style.cardSubTitle}>10 days to deadline.</div>
+        <Card style = {Styles.root}>
+            <div style =  {Styles.cardHeader}>
+                <div style = {Styles.headerText}>
+                    <Typography style = {Styles.cardTitle}>{props.title}</Typography>
+                    <div style = {Styles.cardSubTitle}>10 days to deadline.</div>
                 </div>
                 
-                <div style= {Style.optionsButton}>
+                <div style = {Styles.optionsButton}>
                     <IconButton aria-label="Settings" >
                         <MoreVertIcon />
                     </IconButton>
                 </div>
             </div>
             
-            <CardActions className={styles.cardActions}>
+            <CardActions style = {Styles.cardActions}>
                 <ThemeProvider theme= {twoButtonTheme}>
                     <div>
                         <IconButton aria-label="Edit" color= 'primary'>
@@ -86,7 +60,7 @@ const TaskCard = (props) => {
                 </ThemeProvider>
                 <div>
                     <IconButton
-                        className= {expanded ? styles.expanded : styles.expand}
+                        style = {expanded ? Styles.expanded : Styles.expand}
                         onClick={handleExpand}
                         aria-label="Show more"    
                         color= 'primary'    
