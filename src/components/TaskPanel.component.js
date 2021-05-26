@@ -5,7 +5,7 @@ const TaskPanel = (props) => {
         <div style= {{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', width: '100%'}}>
             {
                 props.children.map(element => {
-                    return <TaskCardHolder>{element}</TaskCardHolder>
+                    return <TaskCardHolder title= {element[0]}>{element[1]}</TaskCardHolder>
                 })
             }
         </div>
