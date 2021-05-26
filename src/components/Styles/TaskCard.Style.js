@@ -36,7 +36,7 @@ const Styles = {          //  For styling Material UI components.
     headerText: {
         display: 'flex',
         flexDirection: 'column',
-        width: .68 * maxWidth,
+        width: .8 * maxWidth,
         overflowWrap: 'break-word',
         justifyContent: 'center',
         fontSize: 12,

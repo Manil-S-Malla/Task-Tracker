@@ -35,7 +35,7 @@ const TaskCard = (props) => {
                 </div>
                 
                 <div style = {Styles.optionsButton}>
-                    <IconButton aria-label="Settings" >
+                    <IconButton aria-label="Settings" color= 'primary'>
                         <MoreVertIcon />
                     </IconButton>
                 </div>
