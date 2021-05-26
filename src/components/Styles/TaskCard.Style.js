@@ -1,4 +1,6 @@
 import {TaskCardMaxWidth as maxWidth} from '../Shared/CONST';
+import Colors from '../Shared/Colors';
+
 
 const Styles = {          //  For styling Material UI components.
     root: {
@@ -42,11 +44,12 @@ const Styles = {          //  For styling Material UI components.
 
     cardTitle: {
         fontSize: 15,
+        color: Colors.taskCardTitle,     
     },
 
     cardSubTitle: {
         fontStyle: 'italic',   
-        color: '#757575',     
+        color: Colors.taskCardSubTitle,     
         textAlign: 'right',
     },
 

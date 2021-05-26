@@ -1,13 +1,13 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
+import Colors from './Colors';
 
 const mainTheme = createMuiTheme({
     palette: {
         background: {
-            default: "#F4F5F7"
+            default: Colors.background,
         },
         primary: {
-            main: '#583b9e'
+            main: Colors.primary,
         },
     },
 });
@@ -15,9 +15,11 @@ const mainTheme = createMuiTheme({
 const twoButtonTheme = createMuiTheme({
     palette: {
         primary: {
-            main: '#398AC0'
+            main: Colors.editButton,
         },
-        secondary: red,
+        secondary: {
+            main: Colors.deleteButton,
+        },
     },
 });
 

@@ -1,4 +1,5 @@
 import {TaskCardHolderMaxWidth as maxWidth, TaskCardHolderTitleHeight as titleHeight} from '../Shared/CONST';
+import Colors from '../Shared/Colors';
 
 const Styles = {
     root: {
@@ -8,7 +9,7 @@ const Styles = {
 
     titleContainer: {
         display: 'flex',
-        backgroundColor: '#F4F5F7',
+        backgroundColor: Colors.secondary,
         width: maxWidth,
         height: titleHeight,
         //justifyContent: 'center',
@@ -20,11 +21,11 @@ const Styles = {
     title: {
         marginLeft: 20, 
         fontSize: 17, 
-        color: '#900090',
+        color: Colors.taskCardHolderTitle,
     },
 
     taskCardHolder: {
-        backgroundColor: '#F4F5F7',
+        backgroundColor: Colors.secondary,
         width: maxWidth,
         justifyContent: 'center',
         borderRadius: 5,

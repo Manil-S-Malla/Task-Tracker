@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { lightBlue } from '@material-ui/core/colors';
+import Colors from '../Shared/Colors';
 
 const Styles = makeStyles(() => ({
     title: {
@@ -7,8 +7,8 @@ const Styles = makeStyles(() => ({
     },
 
     avatar: {
-        color: '#fff',
-        backgroundColor: lightBlue[500],
+        color: Colors.userAvatarText,
+        backgroundColor: Colors.userAvatarBackground,
     },
 
     headerButtons: {
