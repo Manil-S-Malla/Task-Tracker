@@ -57,4 +57,5 @@ app.use('/task', taskRouter);
 //  Function to start Server and listen to port no PORT.
 app.listen(PORT, () => {
     console.log(`Server is running on PORT : ${PORT}.`);
+    console.log(`You can now view the Task Tracker backend API's in the browser. http://localhost:${PORT}`);
 })
