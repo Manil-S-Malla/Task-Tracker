@@ -9,8 +9,15 @@ import Typography from '@material-ui/core/Typography';
 import Logo from '@material-ui/icons/TextFields';
 import Styles from './Styles/NavBar.Style';
 
-export default function NavBar() {
+export default function NavBar(props) {
     const styles = Styles()
+    
+    //  Check wether to display 'headerButtons'.
+    let displayHeaderButtons = true;
+    if (props.displayHeaderButtons === true || props.displayHeaderButtons === false) {
+        displayHeaderButtons = props.displayHeaderButtons;
+    }
+
     return (
         <div>
             <AppBar position="static" >
@@ -22,7 +29,7 @@ export default function NavBar() {
                         Task Tracker
                     </Typography>
                     
-                    <div className= {styles.headerButtons}>
+                    <div className= {styles.headerButtons} style= {{display: displayHeaderButtons ? 'flex' : 'none'}}>
                         <IconButton 
                             aria-label="Avatar" 
                             edge= "end" 
