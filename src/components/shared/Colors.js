@@ -10,8 +10,6 @@ const Colors = {
     userAvatarText: '#ffffff',
     editButton: '#398AC0',
     deleteButton: '#f44336',
-
-
 };
 
 export default Colors;
