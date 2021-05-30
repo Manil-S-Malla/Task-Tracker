@@ -9,6 +9,10 @@ const mainTheme = createMuiTheme({
         primary: {
             main: Colors.primary,
         },
+        secondary: {
+            main: Colors.secondary,
+        },
+        
     },
 });
 
