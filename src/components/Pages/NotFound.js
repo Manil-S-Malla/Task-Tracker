@@ -1,10 +1,15 @@
 import React from 'react';
+import {useEffect} from 'react';
 import {useLocation} from "react-router-dom";
 
 import NavBar from '../NavBar.component';
 import {BaseURL} from '../Shared/CONST';
 
 const Login = () => {
+    useEffect(() => {
+        document.title = "404 - Not found";
+    }, []);
+
     let location = useLocation();
 
     return(
