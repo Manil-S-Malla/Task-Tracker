@@ -34,7 +34,12 @@ export default function NavBar(props) {
                             aria-label="Avatar" 
                             edge= "end" 
                         >
-                            <Avatar className= {styles.avatar}>M</Avatar>
+                            {console.log(props.username)}
+                            {
+                                (props.username.firstname === null) ?
+                                    <Avatar className= {styles.avatar}></Avatar> :
+                                    <Avatar className= {styles.avatar}>{props.username.firstname[0]}</Avatar> 
+                            }
                         </IconButton>
                     </div>
                 </Toolbar>
