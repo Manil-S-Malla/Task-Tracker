@@ -21,14 +21,65 @@ const Login = () => {
         document.title = "Task Tracker - Login";
     }, []);
 
+    function storeInfoToLocalStorage() {
+        localStorage.setItem('rememberMe', rememberMe);
+        if(user!== null) {
+            localStorage.setItem('userId', user.id);
+            localStorage.setItem('userEmail', user.email);
+            localStorage.setItem('userFirstname', user.name.firstname);
+            localStorage.setItem('userMiddlename', user.name.middlename);
+            localStorage.setItem('userFamilyname', user.name.familyname);
+        }
+    }
+
     let history = useHistory();
     const redirectToHomepage = () => {
-        history.push('/')
+        storeInfoToLocalStorage();
+        history.push('/');
     };
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [rememberMe, setRememberMe] = useState(false);
+    const [isEmailInValid, setIsEmailInValid] = useState(false);
+    const [isPasswordInValid, setIsPasswordInValid] = useState(false);
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+    
+    const [rememberMe, setRememberMe] = useState(false);   
+    
+    let user = null;
+
+    function emailIsIncorrect(isEmailIncorrect) {
+        if (isEmailIncorrect) {
+            setEmailErrorMessage("E-mail address is incorrect.");
+            setIsEmailInValid(true);
+        }
+        else {
+            setEmailErrorMessage("");
+            setIsEmailInValid(false);
+        }
+    }
+
+    function passwordIsIncorrect(isPasswordIncorrect) {
+        if (isPasswordIncorrect) {
+            setPasswordErrorMessage("Password is incorrect.");
+            setIsPasswordInValid(true);
+        }
+        else {
+            setPasswordErrorMessage("");
+            setIsPasswordInValid(false);
+        }
+    }
+
+    function emailIsNull() {
+        setEmailErrorMessage("E-mail address is required.");
+        setIsEmailInValid(true);
+    }
+
+    function passwordIsNull() {
+        setPasswordErrorMessage("Password is required.");
+        setIsPasswordInValid(true);
+    }
     
 
     const handleEmailChange = event => {
@@ -43,12 +94,60 @@ const Login = () => {
         setRememberMe(event.target.checked);
     }
 
-    const handleLogin = () => {
-        alert(`Email: ${email} \nPassword: ${password} \nRemember Me: ${rememberMe}`)
-        redirectToHomepage();
+    const getUserInfoByEmail = (email) => {
+        const ApiURL = `${DbUrl}/users/email/${email}`; 
+        return axios.get(ApiURL)
+            .then(response => response.data)
+            .catch(error => null);
+    };
+
+    async function isUserAuthorised (email, password) {
+        const userInfo = await getUserInfoByEmail(email);
+        if (userInfo === null){
+            return null;
+        }
+        else {         
+            setIsEmailInValid(false);
+            if(userInfo.password === password){
+                user = {
+                    id: userInfo._id,
+                    name: userInfo.name,
+                    email: userInfo.email
+                }
+                return true;
+            }
+            return false;
+        }
     }
-    
-    console.log(rememberMe);
+
+    const handleLogin = () => {
+        isUserAuthorised(email, password)
+            .then(response => {
+                if (response === true) {
+                    emailIsIncorrect(false);
+                    passwordIsIncorrect(false);
+                    redirectToHomepage();
+                }
+                else if (response === false) {
+                    passwordIsIncorrect(true);
+                    emailIsIncorrect(false);
+                }
+                else if (response === null) {
+                    emailIsIncorrect(true);
+                    passwordIsIncorrect(false);
+                }
+                else{
+                    alert(`Invalid data received.`);
+                }
+
+                if(email === '') {
+                    emailIsNull()
+                }
+                if(password === '') {
+                    passwordIsNull()
+                }
+            });
+    }
 
     return (
         <div style= {Styles.root}>
@@ -81,6 +180,8 @@ const Login = () => {
                         color= 'primary'
                         value= {email}
                         onChange= {handleEmailChange}
+                        error = {isEmailInValid}
+                        helperText={ emailErrorMessage}
                     />
 
                     <TextField
@@ -95,6 +196,8 @@ const Login = () => {
                         color= 'primary'
                         value= {password}
                         onChange= {handlePasswordChange}
+                        error = {isPasswordInValid}
+                        helperText={ passwordErrorMessage}
                     />
 
                     <FormControlLabel
