@@ -1,4 +1,5 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,13 +11,29 @@ import Logo from '@material-ui/icons/TextFields';
 import Styles from './Styles/NavBar.Style';
 
 export default function NavBar(props) {
-    const styles = Styles()
+    const [username, setUsername] =  useState({ 
+        firstname: null,        
+        middlename: null,
+        familyname: null
+    });
+
+    useEffect(() => {      
+        //  Getting User Info
+        const name = {
+            firstname: localStorage.getItem('userFirstname'),
+            middlename: localStorage.getItem('userMiddlename'),
+            familyname: localStorage.getItem('userFamilyname') 
+        }
+        setUsername(prevState => name);
+    }, []);
     
     //  Check wether to display 'headerButtons'.
     let displayHeaderButtons = true;
     if (props.displayHeaderButtons === true || props.displayHeaderButtons === false) {
         displayHeaderButtons = props.displayHeaderButtons;
     }
+
+    const styles = Styles();
 
     return (
         <div>
@@ -33,12 +50,13 @@ export default function NavBar(props) {
                         <IconButton 
                             aria-label="Avatar" 
                             edge= "end" 
+                            onClick = {() => {localStorage.setItem('userId', null)}}
                         >
-                            {console.log(props.username)}
+                            {console.log(username)}
                             {
-                                (props.username.firstname === null) ?
-                                    <Avatar className= {styles.avatar}></Avatar> :
-                                    <Avatar className= {styles.avatar}>{props.username.firstname[0]}</Avatar> 
+                                (username.firstname === null) ?
+                                    <Avatar className= {styles.avatar} ></Avatar> :
+                                    <Avatar className= {styles.avatar} >{username.firstname[0]}</Avatar> 
                             }
                         </IconButton>
                     </div>

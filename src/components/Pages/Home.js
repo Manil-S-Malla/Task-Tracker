@@ -1,25 +1,14 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 
 import NavBar from '../NavBar.component';
 import TaskCard from '../TaskCard.component';
 import TaskPanel from '../TaskPanel.component';
 
 const Home = () => {
-    const [username, setUsername] =  useState({ 
-        firstname: null,        
-        middlename: null,
-        familyname: null
-    });
-
+    
     useEffect(() => {
         document.title = "Task Tracker";
-        const name = {
-            firstname: localStorage.getItem('userFirstname'),
-            middlename: localStorage.getItem('userMiddlename'),
-            familyname: localStorage.getItem('userFamilyname') 
-        }
-        setUsername(prevState => name);
     }, []);
 
     const ToDo = ['To-Do',[<TaskCard title= "Jogging"/>, <TaskCard title= "Coding"/> ]];
@@ -30,7 +19,7 @@ const Home = () => {
 
     return(
         <React.Fragment>
-            <NavBar username= {username}/>
+            <NavBar/>
             <div style= {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                 <TaskPanel> 
                     {ToDo}
