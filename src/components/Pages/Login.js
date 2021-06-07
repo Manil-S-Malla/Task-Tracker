@@ -16,10 +16,15 @@ import Styles from '../Styles/LoginPage.Style';
 import Logo from '@material-ui/icons/TextFields';
 
 
-const Login = () => {
+const Login = (props) => {
     useEffect(() => {
         document.title = "Task Tracker - Login";
     }, []);
+
+    function changeLoggedIn(loggedIn) {
+        props.changeLoggedIn(loggedIn);
+    }
+  
 
     function storeInfoToLocalStorage() {
         localStorage.setItem('rememberMe', rememberMe);
@@ -35,6 +40,7 @@ const Login = () => {
     let history = useHistory();
     const redirectToHomepage = () => {
         storeInfoToLocalStorage();
+        changeLoggedIn(true);
         history.push('/');
     };
 
