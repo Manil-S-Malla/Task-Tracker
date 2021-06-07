@@ -19,9 +19,13 @@ const URI = process.env.ATLAS_URI;
 mongoose.connect(
     URI, {
         useNewUrlParser: true, 
+        useCreateIndex:true,
         useUnifiedTopology: true 
     }
-);
+)
+    .then(response => {console.log(response)})
+    .catch(err => {console.log(err)});
+
 const connection = mongoose.connection;
 
 //  listen for 'error' event 'on' the 'connection', if 'error' execute the arrow function. 
