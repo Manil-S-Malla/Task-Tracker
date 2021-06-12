@@ -77,8 +77,6 @@ const updateTask = (req, res) => {
 exports.findAllTasks = findAllTasks;
 exports.createTask = createTask;
 exports.findTaskById = findTaskById;
-exports.findTaskByUserId = findTaskByUserId;
+exports.findTasksByUserId = findTasksByUserId;
 exports.deleteTask = deleteTask;
 exports.updateTask = updateTask;
-
-
