@@ -4,6 +4,7 @@ import {useState} from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Styles from './Styles/TaskCard.Style';
 import {twoButtonTheme} from './Shared/Theme';
+import {msToTimeText} from './Shared/DateTime';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -31,7 +32,14 @@ const TaskCard = (props) => {
             <div style =  {Styles.cardHeader}>
                 <div style = {Styles.headerText}>
                     <Typography style = {Styles.cardTitle}>{props.title}</Typography>
-                    <div style = {Styles.cardSubTitle}>10 days to deadline.</div>
+                    <div style = {Styles.cardSubTitle}>
+                        {
+                            msToTimeText(props.timeTillDeadline) === '' ?
+                            'Deadline Passed' :
+                            msToTimeText(props.timeTillDeadline) + ' till deadline.'
+                            
+                        }
+                    </div>
                 </div>
                 
                 <div style = {Styles.optionsButton}>
@@ -74,7 +82,7 @@ const TaskCard = (props) => {
                 <CardContent>
                 
                     <Typography paragraph>
-                        Go jogging every morning at 800 to stay healthy.
+                        {props.description}
                     </Typography>
                     
                 </CardContent>

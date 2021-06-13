@@ -3,14 +3,18 @@ import {useState, useEffect} from 'react';
 
 import axios from 'axios';
 import {DBBaseURL as DbUrl} from '../Shared/CONST';
+import {getTextDay, getTextDayMonth, getTextMonth} from '../Shared/DateTime';
 
 import NavBar from '../NavBar.component';
 import TaskCard from '../TaskCard.component';
 import TaskPanel from '../TaskPanel.component';
 
 const Home = () => {
+    const [currentDateTime, setCurrentDateTime] = useState(new Date());
+
     useEffect(() => {
         document.title = "Task Tracker";
+        let updateCurrentDateTime = setInterval( () => setCurrentDateTime(new Date()), 1000 );
         taskCardsSet();
     }, []);
 
@@ -51,7 +55,12 @@ const Home = () => {
 
     function jsonToTaskCard(object){
         return (
-            <TaskCard title= {object.name}/>
+            <TaskCard 
+                title= {object.name} 
+                //hardDeadline = {object.hardDeadline.substring(0, 10)}
+                timeTillDeadline = {new Date(object.hardDeadline).getTime() - currentDateTime.getTime()}
+                description = {object.description}   
+            />
         );
     }
 
@@ -72,7 +81,9 @@ const Home = () => {
     return(
         <React.Fragment>
             <NavBar/>
-            <div style= {{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+            <div style= {{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                {getTextDay(currentDateTime.getDay())}, {getTextDayMonth(currentDateTime.getDate())} of {getTextMonth(currentDateTime.getMonth())} {currentDateTime.getFullYear()} C.E.
+                <br/>{currentDateTime.toLocaleTimeString()}
                 <TaskPanel> 
                     {
                         taskCards.map(taskCard => taskCard)
