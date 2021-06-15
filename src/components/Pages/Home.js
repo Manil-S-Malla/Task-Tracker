@@ -14,7 +14,10 @@ const Home = () => {
 
     useEffect(() => {
         document.title = "Task Tracker";
-        let updateCurrentDateTime = setInterval( () => setCurrentDateTime(new Date()), 1000 );
+        setInterval( () => {
+            setCurrentDateTime(new Date());
+        }, 1000 );
+        
         taskCardsSet();
     }, []);
 
@@ -57,9 +60,9 @@ const Home = () => {
         return (
             <TaskCard 
                 title= {object.name} 
-                //hardDeadline = {object.hardDeadline.substring(0, 10)}
-                timeTillDeadline = {new Date(object.hardDeadline).getTime() - currentDateTime.getTime()}
+                hardDeadline = {object.hardDeadline}
                 description = {object.description}   
+                status = {object.status}
             />
         );
     }
