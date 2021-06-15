@@ -29,12 +29,45 @@ const msToTimeText = (duration) => {
     const time = msToTime(duration);
     let timeText = '';
 
-    (time[5] > 1) ? timeText = timeText + time[5]+ ' years ' : 
-    (time[4] > 1) ? timeText = timeText + time[4]+ ' months ' : 
-    (time[3] > 1) ? timeText = timeText + time[3]+ ' days ' : 
-    (time[2] > 1) ? timeText = timeText + time[2]+ ' hours ' : 
-    (time[1] > 1) ? timeText = timeText + time[1]+ ' minutes ' : 
-    (time[0] > 1) ? timeText = timeText + time[0]+ ' seconds ' :  timeText = timeText;
+    (time[5] > 1) ? 
+        timeText = timeText + time[5]+ ' years ' :
+        timeText = timeText; 
+    (time[4] > 1) ? 
+        timeText = timeText + time[4]+ ' months ' :
+        timeText = timeText; 
+    (time[3] > 1) ? 
+        timeText = timeText + time[3]+ ' days ' :
+        timeText = timeText; 
+    (time[2] > 1) ? 
+        timeText = timeText + time[2]+ ' hours ' :
+        timeText = timeText; 
+    (time[1] > 1) ? 
+        timeText = timeText + time[1]+ ' minutes ' :
+        timeText = timeText; 
+    (time[0] > 1) ? 
+        timeText = timeText + time[0]+ ' seconds ' :
+        timeText = timeText;
+    
+    return timeText;
+};
+
+const msToTimeTextShort = (duration) => {
+    const time = msToTime(duration);
+    let timeText = '';
+
+    (time[5] > 1) ? 
+        timeText = timeText + time[5]+ ' years ' :  
+        (time[4] > 1) ? 
+            timeText = timeText + time[4]+ ' months ' :  
+            (time[3] > 1) ? 
+                timeText = timeText + time[3]+ ' days ' :  
+                (time[2] > 1) ? 
+                    timeText = timeText + time[2]+ ' hours ' :  
+                    (time[1] > 1) ? 
+                        timeText = timeText + time[1]+ ' minutes ' :  
+                        (time[0] > 1) ? 
+                            timeText = timeText + time[0]+ ' seconds ' : 
+                            timeText = timeText;
     
     return timeText;
 };
@@ -44,3 +77,4 @@ exports.getTextMonth = getTextMonth;
 exports.getTextDayMonth = getTextDayMonth;
 exports.msToTime = msToTime;
 exports.msToTimeText = msToTimeText;
+exports.msToTimeTextShort = msToTimeTextShort;
