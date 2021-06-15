@@ -1,10 +1,11 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import Styles from './Styles/TaskCard.Style';
 import {twoButtonTheme} from './Shared/Theme';
-import {msToTimeText} from './Shared/DateTime';
+import {msToTimeTextShort} from './Shared/DateTime';
+import {StatusIdDone} from './Shared/CONST';
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -27,6 +28,14 @@ const TaskCard = (props) => {
         setExpanded(!expanded);
     };
 
+    const [timeTillDeadline, setTimeTillDeadline] = useState(new Date(props.hardDeadline).getTime() - new Date().getTime());
+    
+    useEffect(() => {
+       setInterval( () => {
+            setTimeTillDeadline(new Date(props.hardDeadline).getTime() - new Date().getTime());
+        }, 1000 );
+    }, []);
+
     return (
         <Card style = {Styles.root}>
             <div style =  {Styles.cardHeader}>
@@ -34,10 +43,11 @@ const TaskCard = (props) => {
                     <Typography style = {Styles.cardTitle}>{props.title}</Typography>
                     <div style = {Styles.cardSubTitle}>
                         {
-                            msToTimeText(props.timeTillDeadline) === '' ?
-                            'Deadline Passed' :
-                            msToTimeText(props.timeTillDeadline) + ' till deadline.'
-                            
+                            props.status === StatusIdDone ?
+                                '' :
+                                msToTimeTextShort(timeTillDeadline) === '' ?
+                                    'Deadline Passed' :
+                                    msToTimeTextShort(timeTillDeadline) + ' till deadline.'
                         }
                     </div>
                 </div>
