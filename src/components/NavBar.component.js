@@ -52,7 +52,6 @@ export default function NavBar(props) {
                             edge= "end" 
                             onClick = {() => {localStorage.setItem('userId', null)}}
                         >
-                            {console.log(username)}
                             {
                                 (username.firstname === null) ?
                                     <Avatar className= {styles.avatar} ></Avatar> :

@@ -29,14 +29,14 @@ function App() {
     }
   
 
-    const isLoggedIn = () => {
-        userId === 'null' ?
+    function isLoggedIn(uId) {
+        uId === 'null' ?
             setLoggedIn(false) :
             setLoggedIn(true)
     }
 
     useEffect(() => {
-        isLoggedIn();
+        isLoggedIn(userId);
     }, []);
 
     console.log(`Is Logged In ? : ${loggedIn}`);
