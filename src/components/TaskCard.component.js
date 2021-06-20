@@ -3,7 +3,8 @@ import {useState, useEffect} from 'react';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import Styles from './Styles/TaskCard.Style';
-import {twoButtonTheme} from './Shared/Theme';
+import {editBlue} from './Shared/Theme';
+import {deleteRed} from './Shared/Theme';
 import {msToTimeTextShort} from './Shared/DateTime';
 import {StatusIdDone} from './Shared/CONST';
 
@@ -60,22 +61,26 @@ const TaskCard = (props) => {
             </div>
             
             <CardActions style = {Styles.cardActions}>
-                <ThemeProvider theme= {twoButtonTheme}>
+               
                     <div>
-                        <IconButton aria-label="Edit" color= 'primary'>
-                            <EditIcon/>
-                        </IconButton>
+                        <ThemeProvider theme= {editBlue}>
+                            <IconButton aria-label="Edit" color= 'primary'>
+                                <EditIcon/>
+                            </IconButton>
+                        </ThemeProvider>
                         <IconButton aria-label="Go Behind">
                             <UndoIcon />
                         </IconButton>
                         <IconButton aria-label="Go Ahead">
                             <RedoIcon />
                         </IconButton>
-                        <IconButton aria-label="Delete"  color= 'secondary'>
-                            <DeleteIcon />
-                        </IconButton>
+                        <ThemeProvider theme= {deleteRed}>
+                            <IconButton aria-label="Delete"  color= 'primary'>
+                                <DeleteIcon />
+                            </IconButton>
+                        </ThemeProvider>
                     </div>
-                </ThemeProvider>
+               
                 <div>
                     <IconButton
                         style = {expanded ? Styles.expanded : Styles.expand}
