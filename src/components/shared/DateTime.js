@@ -72,9 +72,28 @@ const msToTimeTextShort = (duration) => {
     return timeText;
 };
 
+const mUIValidDateTime = () => {
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth() > 8 ? 
+        new Date().getMonth() + 1 : 
+        '0' + (new Date().getMonth() + 1);
+    const day = new Date().getDate() > 8 ? 
+        new Date().getDate(): 
+        '0' + new Date().getDate();
+    const hour = new Date().getHours() > 8 ? 
+        new Date().getHours(): 
+        '0' + new Date().getHours();
+    const minute= new Date().getMinutes() > 8 ? 
+        new Date().getMinutes(): 
+        '0' + new Date().getMinutes();
+    
+    return year + '-' + month + '-' + day + 'T' + hour + ':' + minute;
+}
+
 exports.getTextDay = getTextDay;
 exports.getTextMonth = getTextMonth;
 exports.getTextDayMonth = getTextDayMonth;
 exports.msToTime = msToTime;
 exports.msToTimeText = msToTimeText;
 exports.msToTimeTextShort = msToTimeTextShort;
+exports.mUIValidDateTime = mUIValidDateTime;
