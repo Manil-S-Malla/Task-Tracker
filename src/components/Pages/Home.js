@@ -8,9 +8,13 @@ import {getTextDay, getTextDayMonth, getTextMonth} from '../Shared/DateTime';
 import NavBar from '../NavBar.component';
 import TaskCard from '../TaskCard.component';
 import TaskPanel from '../TaskPanel.component';
+import EditTask from '../EditTask.component';
+
+import Styles from '../Styles/HomePage.Style';
 
 const Home = () => {
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
+    const [Statuses, setStatuses] = useState([]);
 
     useEffect(() => {
         document.title = "Task Tracker";
@@ -59,6 +63,7 @@ const Home = () => {
     function jsonToTaskCard(object){
         return (
             <TaskCard 
+                id = {object._id}
                 title= {object.name} 
                 hardDeadline = {object.hardDeadline}
                 description = {object.description}   
@@ -69,6 +74,7 @@ const Home = () => {
 
     async function taskCardsSet() {
         const statuses = await getAllStatuses();
+        setStatuses(statuses);          //  To store for future use. ( Like sending to other components. )
         const tasks = await getTasksByUserId(userId);
         let taskPanelData = [];
         
@@ -82,18 +88,28 @@ const Home = () => {
     }
 
     return(
-        <React.Fragment>
+        <div style= {Styles.root}>
+            <EditTask 
+                statuses= {Statuses}
+                task= {{
+                    name: "Create add task functionality.", 
+                    status: "6086cb53f719352a1cbf3af7",
+                    description: "Create add task functionality in the Task Tracker app. Create a form component and connect it to the create task api."
+                }}
+            />
+
             <NavBar/>
-            <div style= {{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
-                {getTextDay(currentDateTime.getDay())}, {getTextDayMonth(currentDateTime.getDate())} of {getTextMonth(currentDateTime.getMonth())} {currentDateTime.getFullYear()} C.E.
-                <br/>{currentDateTime.toLocaleTimeString()}
+            <div>
+                {/* {getTextDay(currentDateTime.getDay())}, {getTextDayMonth(currentDateTime.getDate())} of {getTextMonth(currentDateTime.getMonth())} {currentDateTime.getFullYear()} C.E.
+                <br/>{currentDateTime.toLocaleTimeString()} */}
+                {localStorage.getItem('userFirstname')}'s tasks.
                 <TaskPanel> 
                     {
                         taskCards.map(taskCard => taskCard)
                     }
-                </TaskPanel>
+                </TaskPanel>    
             </div>
-        </React.Fragment>
+        </div>
     )
 }
 
