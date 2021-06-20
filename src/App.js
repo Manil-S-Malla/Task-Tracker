@@ -15,7 +15,7 @@ import NotFoundPage from './components/Pages/NotFound';
 import ForgotPasswordPage from './components/Pages/ForgotPassword';
 import RegisterPage from './components/Pages/Register';
 
-import {ThemeProvider } from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/core/styles';
 import {mainTheme} from './components/Shared/Theme';
 
 

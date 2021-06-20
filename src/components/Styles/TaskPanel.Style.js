@@ -3,7 +3,8 @@ const Styles = {
         display: 'flex',
         flexDirection: 'row', 
         justifyContent: 'space-evenly', 
-        width: '100%'
+        width: '100%',
+        marginTop: 20,
     },
 
 };     
