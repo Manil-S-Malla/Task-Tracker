@@ -40,5 +40,13 @@ const okGreen = createMuiTheme({
     },
 });
 
+const backgroundWhite = createMuiTheme({
+    palette: {
+        primary: {
+            main: Colors.background,
+        },
+    },
+});
 
-export { mainTheme, editBlue, deleteRed, okGreen};
+
+export { mainTheme, editBlue, deleteRed, okGreen, backgroundWhite};
