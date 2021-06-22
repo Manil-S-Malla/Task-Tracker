@@ -129,7 +129,8 @@ const TaskCard = (props) => {
                         softDeadline: props.softDeadline,
                     }}
 
-                    close= {handleCloseEditDialogue}
+                    handleClose= {handleCloseEditDialogue}
+                    updateState= {props.taskCardsSet}
                 />
             </Dialog>
         </React.Fragment>
