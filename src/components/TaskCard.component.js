@@ -2,6 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 
 import EditTask from './EditTask.component';
+import {deleteTask} from './Shared/ApiFunctions';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import Styles from './Styles/TaskCard.Style';
@@ -43,7 +44,7 @@ const TaskCard = (props) => {
     };
 
     const [timeTillDeadline, setTimeTillDeadline] = useState(new Date(props.hardDeadline).getTime() - new Date().getTime());
-    
+
     useEffect(() => {
        setInterval( () => {
             setTimeTillDeadline(new Date(props.hardDeadline).getTime() - new Date().getTime());
@@ -89,7 +90,13 @@ const TaskCard = (props) => {
                                 <RedoIcon />
                             </IconButton>
                             <ThemeProvider theme= {deleteRed}>
-                                <IconButton aria-label="Delete"  color= 'primary'>
+                                <IconButton 
+                                    aria-label="Delete"  
+                                    color= 'primary' 
+                                    onClick= {() => {
+                                        deleteTask(props.id);
+                                        props.taskCardsSet();
+                                    }}>
                                     <DeleteIcon />
                                 </IconButton>
                             </ThemeProvider>

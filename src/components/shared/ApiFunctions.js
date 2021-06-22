@@ -45,3 +45,17 @@ export function updateTask(tId, updatedInfo) {
             return {status: 'error', response: error.message};
         });
 }
+
+export function deleteTask(tId) {
+    const ApiURL = `${DbUrl}/task/${tId}`; 
+  
+    return axios.delete(ApiURL)
+        .then(response => {
+            console.log(response);
+            return {status: 'success', response: response};
+        })
+        .catch(error => {
+            console.log(error);
+            return {status: 'error', response: error.message};
+        });
+}
