@@ -59,3 +59,16 @@ export function deleteTask(tId) {
             return {status: 'error', response: error.message};
         });
 }
+
+export function addTask(taskInfo) {
+    const ApiURL = `${DbUrl}/task/add`; 
+  
+    return axios.post(ApiURL, taskInfo)
+        .then(response => {
+            return {status: 'success', response: response};
+        })
+        .catch(error => {
+            console.log(error);
+            return {status: 'error', response: error.message};
+        });
+}
