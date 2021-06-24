@@ -178,14 +178,15 @@ const EditTask = (props) => {
                         <ThemeProvider theme= {okGreen}>    
                             <IconButton 
                                 onClick= {async() => {
-                                    const reply = await updateTask(props.task.id, {
+                                    const updatedInfo = {
                                         name: name,
                                         description: description,
-                                        softDeadline: softDeadline,
-                                        hardDeadline: hardDeadline,
+                                        softDeadline: softDeadline + ':00.000Z',            //  To ensure the data does not change due to difference in the type of data to denote time in MongoDb (ie: yyyy-mm-ddThh:mi:ss.mlsZ) as compared to Material UI (ie: yyyy-mm-ddThh:mi).
+                                        hardDeadline: hardDeadline + ':00.000Z',            //  To ensure the data does not change due to difference in the type of data to denote time in MongoDb (ie: yyyy-mm-ddThh:mi:ss.mlsZ) as compared to Material UI (ie: yyyy-mm-ddThh:mi).
                                         status: status,
                                         user: localStorage.getItem('userId')
-                                    });
+                                    };
+                                    const reply = await updateTask(props.task.id, updatedInfo);
                                     if(reply.status === 'success'){
                                         if(reply.response != undefined){
                                             if(reply.response.status === 200){
