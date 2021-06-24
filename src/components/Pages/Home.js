@@ -3,6 +3,10 @@ import {useState, useEffect} from 'react';
 
 import NavBar from '../NavBar.component';
 import TaskPanel from '../TaskPanel.component';
+import AddTask from '../AddTask.component';
+
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
 
 import Styles from '../Styles/HomePage.Style';
 
@@ -36,9 +40,35 @@ const Home = () => {
         setTaskCards(taskPanelData);
     }
 
+    const [openAddDialogue, setOpenAddDialogue] = useState(false);
+
+    const handleOpenAddDialogue = () => {
+        setOpenAddDialogue(true);
+    };
+
+    const handleCloseAddDialogue = () => {
+        setOpenAddDialogue(false);
+    };
+
     return(
         <div style= {Styles.root}>
             <NavBar/>
+            <Button 
+                color= "primary"
+                onClick= {handleOpenAddDialogue} 
+                style= {{maxWidth: 80, margin: 10}}    
+                variant= "contained"
+            >
+                Add
+            </Button>
+            
+            <Dialog open={openAddDialogue} onClose={handleCloseAddDialogue} aria-labelledby="form-dialog-title">
+                <AddTask 
+                    handleClose= {handleCloseAddDialogue}
+                    updateState= {taskCardsSet}
+                />
+            </Dialog>
+
             <div>
                 <TaskPanel> 
                     {
