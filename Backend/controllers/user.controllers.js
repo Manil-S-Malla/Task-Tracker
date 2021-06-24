@@ -36,6 +36,16 @@ const findUserById = (req, res) => {
         .catch( err => res.status(400).json(`Error: ${err}`));
 };
 
+const findUserByEmail = (req, res) => {
+    User.findOne({email: req.params.email})
+        .then( user => 
+            user === null ? 
+                res.status(404).json(`User with Email ${req.params.email} does not exists.`) : 
+                res.json(user)
+        )
+        .catch( err => res.status(400).json(`Error: ${err}`));
+};
+
 const deleteUser = (req, res) => {
     User.findByIdAndDelete(req.params.id)
         .then( () => res.json(`User ${req.params.id} deleted.`))
@@ -62,6 +72,7 @@ const updateUser = (req, res) => {
 exports.findAllUsers = findAllUsers;
 exports.createUser = createUser;
 exports.findUserById = findUserById;
+exports.findUserByEmail = findUserByEmail;
 exports.deleteUser = deleteUser;
 exports.updateUser = updateUser;
 

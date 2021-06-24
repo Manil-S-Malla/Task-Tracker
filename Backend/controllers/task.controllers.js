@@ -40,6 +40,16 @@ const findTaskById = (req, res) => {
         .catch( err => res.status(400).json(`Error: ${err}`));
 };
 
+const findTasksByUserId = (req, res) => {
+    Task.find({user: req.params.userId})
+        .then( task => 
+            task === null ? 
+                res.status(404).json(`Task with User Id ${req.params.userId} does not exists.`) : 
+                res.json(task)
+        )
+        .catch( err => res.status(400).json(`Error: ${err}`));
+};
+
 const deleteTask = (req, res) => {
     Task.findByIdAndDelete(req.params.id)
         .then( () => res.json(`Task ${req.params.id} deleted.`))
@@ -67,7 +77,6 @@ const updateTask = (req, res) => {
 exports.findAllTasks = findAllTasks;
 exports.createTask = createTask;
 exports.findTaskById = findTaskById;
+exports.findTasksByUserId = findTasksByUserId;
 exports.deleteTask = deleteTask;
 exports.updateTask = updateTask;
-
-

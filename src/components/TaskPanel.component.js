@@ -6,7 +6,7 @@ const TaskPanel = (props) => {
         <div style= {Styles.root}>
             {
                 props.children.map(element => {
-                    return <TaskCardHolder title= {element[0]}>{element[1]}</TaskCardHolder>
+                    return <TaskCardHolder title= {element[0].name}>{element[1]}</TaskCardHolder>
                 })
             }
         </div>

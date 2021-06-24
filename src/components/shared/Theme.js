@@ -9,18 +9,44 @@ const mainTheme = createMuiTheme({
         primary: {
             main: Colors.primary,
         },
+        secondary: {
+            main: Colors.secondary,
+        },
+        
     },
 });
 
-const twoButtonTheme = createMuiTheme({
+const editBlue = createMuiTheme({
     palette: {
         primary: {
-            main: Colors.editButton,
-        },
-        secondary: {
-            main: Colors.deleteButton,
+            main: Colors.editBlue,
         },
     },
 });
 
-export { mainTheme, twoButtonTheme};
+const deleteRed = createMuiTheme({
+    palette: {
+        primary: {
+            main: Colors.deleteRed,
+        },
+    },
+});
+
+const okGreen = createMuiTheme({
+    palette: {
+        primary: {
+            main: Colors.okGreen,
+        },
+    },
+});
+
+const backgroundWhite = createMuiTheme({
+    palette: {
+        primary: {
+            main: Colors.background,
+        },
+    },
+});
+
+
+export { mainTheme, editBlue, deleteRed, okGreen, backgroundWhite};
