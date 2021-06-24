@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 
 import EditTask from './EditTask.component';
-import {deleteTask} from './Shared/ApiFunctions';
+import {updateTask, deleteTask, getAllStatuses} from './Shared/ApiFunctions';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import Styles from './Styles/TaskCard.Style';
@@ -44,9 +44,85 @@ const TaskCard = (props) => {
     };
 
     const [timeTillDeadline, setTimeTillDeadline] = useState(new Date(props.hardDeadline).getTime() - new Date().getTime());
+    
+    const [statuses, setStatuses] = useState([]);
+    
+    const getStatuses = async() => {
+        const response = await getAllStatuses();
+        setStatuses(response);
+    }
+
+    const goBehind = async(index) => {
+        const newStatus = statuses[index - 1]._id;
+        const updatedInfo = {
+            name: props.title,
+            description: props.description,
+            softDeadline: props.softDeadline,
+            hardDeadline: props.hardDeadline,
+            status: newStatus,
+            user: localStorage.getItem('userId')
+        };
+        const reply = await updateTask(props.id, updatedInfo);
+        if(reply.status === 'success'){
+            if(reply.response != undefined){
+                if(reply.response.status === 200){
+                   props.taskCardsSet();
+                }
+                else{
+                    console.log(reply.response.statusText);
+                }
+            }
+        }
+        else if(reply.status === 'error'){
+            console.log(reply.response);
+        }
+    }
+
+    const goAhead = async(index) => {
+        const newStatus = statuses[index + 1]._id;
+        const updatedInfo = {
+            name: props.title,
+            description: props.description,
+            softDeadline: props.softDeadline,
+            hardDeadline: props.hardDeadline,
+            status: newStatus,
+            user: localStorage.getItem('userId')
+        };
+        const reply = await updateTask(props.id, updatedInfo);
+        if(reply.status === 'success'){
+            if(reply.response != undefined){
+                if(reply.response.status === 200){
+                   props.taskCardsSet();
+                }
+                else{
+                    console.log(reply.response.statusText);
+                }
+            }
+        }
+        else if(reply.status === 'error'){
+            console.log(reply.response);
+        }
+    }
+
+    const handleGoBehind = () => {
+        const index = statuses.findIndex(status => status._id === props.status);
+
+        if(index > 0){
+            goBehind(index);
+        }
+    }
+
+    const handleGoAhead = () => {
+        const index = statuses.findIndex(status => status._id === props.status);
+
+        if(index < statuses.length - 1){
+            goAhead(index);
+        }
+    }
 
     useEffect(() => {
-       setInterval( () => {
+        getStatuses();
+        setInterval( () => {
             setTimeTillDeadline(new Date(props.hardDeadline).getTime() - new Date().getTime());
         }, 1000 );
     }, []);
@@ -83,10 +159,18 @@ const TaskCard = (props) => {
                                     <EditIcon/>
                                 </IconButton>
                             </ThemeProvider>
-                            <IconButton aria-label="Go Behind">
+                            <IconButton 
+                                aria-label="Go Behind"
+                                onClick= {handleGoBehind}
+                                disabled= {statuses.findIndex(status => status._id === props.status) > 0 ? false : true}
+                            >
                                 <UndoIcon />
                             </IconButton>
-                            <IconButton aria-label="Go Ahead">
+                            <IconButton 
+                                aria-label="Go Ahead"
+                                onClick= {handleGoAhead}
+                                disabled= {statuses.findIndex(status => status._id === props.status) < statuses.length - 1 ? false : true}
+                            >
                                 <RedoIcon />
                             </IconButton>
                             <ThemeProvider theme= {deleteRed}>
