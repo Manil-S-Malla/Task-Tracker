@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import {useHistory} from "react-router-dom";
 
 import NavBar from '../NavBar.component';
 import TaskPanel from '../TaskPanel.component';
@@ -18,12 +19,24 @@ const Home = () => {
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
     const [taskCards, setTaskCards] = useState([]);
 
+    let history = useHistory();
+    const redirectToLoginPage = () => {
+        history.push('/login');
+    };
+
     useEffect(() => {
         document.title = "Task Tracker";
+        //  Checking if user is logged in.
+        if(localStorage.getItem('userId') === null){
+            redirectToLoginPage();
+        }
+        else{
+            taskCardsSet();
+        }
         setInterval( () => {            //  Update Date & Time.
             setCurrentDateTime(new Date());
         }, 1000 );
-        taskCardsSet();
+        
     }, []);
 
     const taskCardsSet = async() => {
@@ -49,7 +62,7 @@ const Home = () => {
     const handleCloseAddDialogue = () => {
         setOpenAddDialogue(false);
     };
-
+    
     return(
         <div style= {Styles.root}>
             <NavBar/>
