@@ -30,7 +30,7 @@ function App() {
   
 
     function isLoggedIn(uId) {
-        uId === 'null' ?
+        uId === null ?
             setLoggedIn(false) :
             setLoggedIn(true)
     }

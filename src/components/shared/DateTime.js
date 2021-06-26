@@ -80,10 +80,10 @@ const mUIValidDateTime = () => {
     const day = new Date().getDate() > 8 ? 
         new Date().getDate(): 
         '0' + new Date().getDate();
-    const hour = new Date().getHours() > 8 ? 
+    const hour = new Date().getHours() > 9 ? 
         new Date().getHours(): 
         '0' + new Date().getHours();
-    const minute= new Date().getMinutes() > 8 ? 
+    const minute= new Date().getMinutes() > 9 ? 
         new Date().getMinutes(): 
         '0' + new Date().getMinutes();
     
