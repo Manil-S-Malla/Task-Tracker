@@ -11,7 +11,6 @@ import {
 //  get the path and
 //  destructure everything else to '...rest' using the spread operator.
 const ProtectedRoute = ({ component: ComponentProp, isAuthorised, ...rest }) => {   
-    console.log(`Is Authorised ? : ${isAuthorised}`);
     return (
         <Route 
             {...rest}
