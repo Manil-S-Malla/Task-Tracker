@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import {useHistory} from "react-router-dom";
 
-import NavBar from '../NavBar.component';
+import NavBar from '../NavBar.component copy';
 import TaskPanel from '../TaskPanel.component';
 import AddTask from '../AddTask.component';
 

@@ -9,6 +9,16 @@ import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import {Drawer} from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
 
 import Logo from '@material-ui/icons/TextFields';
 import Styles from './Styles/NavBar.Style';
@@ -22,6 +32,17 @@ export default function NavBar(props) {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+
+    const [isDrawerOpened, setIsDrawerOpened] = useState(false);
+
+    const toggleDrawerStatus = () => {
+        setIsDrawerOpened(!isDrawerOpened);
+        console.log(isDrawerOpened);
+    };
+
+    const closeDrawer = () => {
+        setIsDrawerOpened(false);
+    };
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -65,7 +86,7 @@ export default function NavBar(props) {
                 }}
             >
                 <Toolbar>
-                    <IconButton color="inherit" aria-label="Logo" size= "medium" edge= "start">
+                    <IconButton onClick= {toggleDrawerStatus} color="inherit" aria-label="Logo" size= "medium" edge= "start">
                         <Logo />
                     </IconButton>
                     <Typography variant= "h6" className= {styles.title}>
@@ -112,14 +133,40 @@ export default function NavBar(props) {
                                 Log Out
                             </MenuItem> 
                         </Menu>
-                       
-                       
-                      
-                        
-                        
                     </div>
                 </Toolbar>
             </AppBar>
+
+            <Drawer
+                variant="permanent"
+                open={false}
+                onClose={closeDrawer}
+            >
+                <div>
+                    <IconButton onClick={closeDrawer}>
+                        <ChevronLeftIcon />
+                    </IconButton>
+                </div>
+                <Divider />
+                    <List>
+                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                            <ListItem button key={text}>
+                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItem>
+                        ))}
+                    </List>
+                <Divider />
+
+                <List>
+                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                        <ListItem button key={text}>
+                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItem>
+                    ))}
+                </List>
+            </Drawer>
         </div>
     );
 }
