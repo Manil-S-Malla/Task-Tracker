@@ -1,7 +1,17 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import Colors from '../Shared/Colors';
 
-const Styles = makeStyles(() => ({
+const Styles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+    },
+
+    navBar: {
+        display: 'flex',
+        flex: 1,
+        justifyContent: 'space-between'
+    },
+
     title: {
         margin: 5,
     },
@@ -14,7 +24,6 @@ const Styles = makeStyles(() => ({
     headerButtons: {
         marginLeft: 'auto',
     },
-
     
 }))
 
