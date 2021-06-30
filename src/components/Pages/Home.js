@@ -1,29 +1,42 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import {useHistory} from "react-router-dom";
 
-import NavBar from '../NavBar.component';
+import Dialog from '@material-ui/core/Dialog';
+
+import NavDraw from '../Shared/NavDraw.component';
 import TaskPanel from '../TaskPanel.component';
 import AddTask from '../AddTask.component';
 
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
+import {getAllStatuses, getTasksByUserId} from '../Shared/ApiFunctions';
+import {jsonToTaskCard} from '../Shared/UtilityFunctions';
 
 import Styles from '../Styles/HomePage.Style';
 
-import {getAllStatuses, getTasksByUserId} from '../Shared/ApiFunctions';
-import {jsonToTaskCard} from '../Shared/UtilityFunctions';
 
 const Home = () => {
     const userId = useState(localStorage.getItem('userId'))[0];
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
     const [taskCards, setTaskCards] = useState([]);
 
+    let history = useHistory();
+    const redirectToLoginPage = () => {
+        history.push('/login');
+    };
+
     useEffect(() => {
         document.title = "Task Tracker";
+        //  Checking if user is logged in.
+        if(localStorage.getItem('userId') === null){
+            redirectToLoginPage();
+        }
+        else{
+            taskCardsSet();
+        }
         setInterval( () => {            //  Update Date & Time.
             setCurrentDateTime(new Date());
         }, 1000 );
-        taskCardsSet();
+        
     }, []);
 
     const taskCardsSet = async() => {
@@ -49,33 +62,25 @@ const Home = () => {
     const handleCloseAddDialogue = () => {
         setOpenAddDialogue(false);
     };
-
+    
     return(
         <div style= {Styles.root}>
-            <NavBar/>
-            <Button 
-                color= "primary"
-                onClick= {handleOpenAddDialogue} 
-                style= {{maxWidth: 80, margin: 10}}    
-                variant= "contained"
-            >
-                Add
-            </Button>
-            
-            <Dialog open={openAddDialogue} onClose={handleCloseAddDialogue} aria-labelledby="form-dialog-title">
-                <AddTask 
-                    handleClose= {handleCloseAddDialogue}
-                    updateState= {taskCardsSet}
-                />
-            </Dialog>
+            <NavDraw openAddTaskDialogue= {handleOpenAddDialogue}> 
+                <div>
+                    <Dialog open={openAddDialogue} onClose={handleCloseAddDialogue} aria-labelledby="form-dialog-title">
+                        <AddTask 
+                            handleClose= {handleCloseAddDialogue}
+                            updateState= {taskCardsSet}
+                        />
+                    </Dialog>
 
-            <div>
-                <TaskPanel> 
-                    {
-                        taskCards.map(taskCard => taskCard)
-                    }
-                </TaskPanel>    
-            </div>
+                    <TaskPanel> 
+                        {
+                            taskCards.map(taskCard => taskCard)
+                        }
+                    </TaskPanel>    
+                </div>   
+            </NavDraw>
         </div>
     )
 }

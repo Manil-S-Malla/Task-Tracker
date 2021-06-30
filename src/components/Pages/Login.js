@@ -19,6 +19,9 @@ import Logo from '@material-ui/icons/TextFields';
 const Login = (props) => {
     useEffect(() => {
         document.title = "Task Tracker - Login";
+        if(localStorage.getItem('rememberMe') != 'true'){
+            localStorage.clear();
+        }
     }, []);
 
     function changeLoggedIn(loggedIn) {

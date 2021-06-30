@@ -2,7 +2,7 @@ import React from 'react';
 import {useEffect} from 'react';
 import {useLocation} from "react-router-dom";
 
-import NavBar from '../NavBar.component';
+import NavBar from '../Shared/NavBar.component';
 import {BaseURL} from '../Shared/CONST';
 
 const Login = () => {

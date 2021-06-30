@@ -20,7 +20,6 @@ import {mainTheme} from './components/Shared/Theme';
 
 
 function App() {
-
     const userId = useState(localStorage.getItem('userId'))[0];
     const [loggedIn, setLoggedIn] = useState(true);
 
@@ -30,7 +29,7 @@ function App() {
   
 
     function isLoggedIn(uId) {
-        uId === 'null' ?
+        uId === null ?
             setLoggedIn(false) :
             setLoggedIn(true)
     }
@@ -38,8 +37,6 @@ function App() {
     useEffect(() => {
         isLoggedIn(userId);
     }, []);
-
-    console.log(`Is Logged In ? : ${loggedIn}`);
 
     return(
         <ThemeProvider theme= {mainTheme}>
