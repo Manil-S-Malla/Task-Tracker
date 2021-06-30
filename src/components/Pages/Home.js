@@ -2,20 +2,17 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import {useHistory} from "react-router-dom";
 
-import NavBar from '../NavBar.component copy';
+import Dialog from '@material-ui/core/Dialog';
+
+import NavDraw from '../Shared/NavDraw.component';
 import TaskPanel from '../TaskPanel.component';
 import AddTask from '../AddTask.component';
-import NavDraw from '../Shared/NavDraw.component';
-
-
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import Typography from '@material-ui/core/Typography';
-
-import Styles from '../Styles/HomePage.Style';
 
 import {getAllStatuses, getTasksByUserId} from '../Shared/ApiFunctions';
 import {jsonToTaskCard} from '../Shared/UtilityFunctions';
+
+import Styles from '../Styles/HomePage.Style';
+
 
 const Home = () => {
     const userId = useState(localStorage.getItem('userId'))[0];
@@ -84,30 +81,6 @@ const Home = () => {
                     </TaskPanel>    
                 </div>   
             </NavDraw>
-            {/* <NavBar/>
-            <Button 
-                color= "primary"
-                onClick= {handleOpenAddDialogue} 
-                style= {{maxWidth: 80, margin: 10}}    
-                variant= "contained"
-            >
-                Add
-            </Button>
-            
-            <Dialog open={openAddDialogue} onClose={handleCloseAddDialogue} aria-labelledby="form-dialog-title">
-                <AddTask 
-                    handleClose= {handleCloseAddDialogue}
-                    updateState= {taskCardsSet}
-                />
-            </Dialog>
-
-            <div>
-                <TaskPanel> 
-                    {
-                        taskCards.map(taskCard => taskCard)
-                    }
-                </TaskPanel>    
-            </div> */}
         </div>
     )
 }
