@@ -2,78 +2,37 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import {useHistory} from "react-router-dom";
 
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import Avatar from '@material-ui/core/Avatar'
-import Drawer from '@material-ui/core/Drawer';
+import clsx from 'clsx';            //  A tiny utility for constructing className strings conditionally, out of an object with keys being the class strings, and values being booleans.
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+
 import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import Drawer from '@material-ui/core/Drawer';
+
+import Divider from '@material-ui/core/Divider';
+
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import PostAddIcon from '@material-ui/icons/PostAdd';
 
 import Logo from '@material-ui/icons/TextFields';
-import Styles from '../Styles/NavBar.Style';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 
-const drawerWidth = '15vw';
-const drawerZIndex = 0;
+import Styles from '../Styles/NavDraw.Style';
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-    },
 
-    hide: {
-        display: 'none',
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-        whiteSpace: 'nowrap',
-        zIndex: drawerZIndex,
-    },
-    drawerOpen: {
-        width: drawerWidth,
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
-    drawerClose: {
-        transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        overflowX: 'hidden',
-        width: theme.spacing(7) + 1,
-        [theme.breakpoints.up('sm')]: {width: theme.spacing(9) + 1,},
-    },
-    toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-    },
-}));
-
-export default function NavDraw(props) {
-    const classes = useStyles();
-    const theme = useTheme();
+const NavDraw = (props) => {
+    //  Getting the styles. 
+    const MUIStyles = Styles();
 
     //  For getting user Info.
     const [username, setUsername] =  useState({ 
@@ -83,7 +42,6 @@ export default function NavDraw(props) {
     });
 
     useEffect(() => {      
-        //  Getting User Info
         const name = {
             firstname: localStorage.getItem('userFirstname'),
             middlename: localStorage.getItem('userMiddlename'),
@@ -98,19 +56,11 @@ export default function NavDraw(props) {
         history.push('/login');
     };
     
-    //  For Drawer.
-    const [open, setOpen] = useState(false);
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+    //  For Drawer component.
+    const [openDrawer, setOpenDrawer] = useState(false);
 
     const handleDrawerToggle = () => {
-        setOpen(!open);
+        setOpenDrawer(!openDrawer);
     };
 
     //  For Drop Down Menu.
@@ -131,19 +81,10 @@ export default function NavDraw(props) {
         displayHeaderButtons = props.displayHeaderButtons;
     }
 
-    const MUIStyles = Styles();
-
 
     return (
-        <div style= {{display: 'flex',}}>
-            <CssBaseline />
-            <AppBar
-                style= {{
-                    display: 'flex',
-                    flex: 1,
-                    justifyContent: 'space-between'
-                }}
-            >
+        <div className= {MUIStyles.root}>
+            <AppBar className= {MUIStyles.navBar}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -200,18 +141,18 @@ export default function NavDraw(props) {
 
             <Drawer
                 variant="permanent"
-                className={clsx(classes.drawer, {
-                [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open,
+                className={clsx(MUIStyles.drawer, {
+                    [MUIStyles.drawerOpen]: openDrawer,
+                    [MUIStyles.drawerClose]: !openDrawer,
                 })}
-                classes={{
+                classes ={{
                 paper: clsx({
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open,
+                    [MUIStyles.drawerOpen]: openDrawer,
+                    [MUIStyles.drawerClose]: !openDrawer,
                 }),
                 }}
             >
-                <div className={classes.toolbar} />
+                <div className={MUIStyles.toolbar} />
                 <Divider />
                 <List>
                     <ListItem button key={'drawerListItemAddTask'} onClick= {props.openAddTaskDialogue}>
@@ -220,10 +161,12 @@ export default function NavDraw(props) {
                     </ListItem>
                 </List>
             </Drawer>
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
+            <div className={MUIStyles.content}>
+                <div className={MUIStyles.toolbar} />
                 {props.children}
-            </main>
+            </div>
         </div>
     );
-}
+};
+
+export default NavDraw;
