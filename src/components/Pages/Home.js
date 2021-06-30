@@ -5,9 +5,12 @@ import {useHistory} from "react-router-dom";
 import NavBar from '../NavBar.component copy';
 import TaskPanel from '../TaskPanel.component';
 import AddTask from '../AddTask.component';
+import NavDraw from '../Shared/NavDraw.component';
+
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import Typography from '@material-ui/core/Typography';
 
 import Styles from '../Styles/HomePage.Style';
 
@@ -65,7 +68,23 @@ const Home = () => {
     
     return(
         <div style= {Styles.root}>
-            <NavBar/>
+            <NavDraw openAddTaskDialogue= {handleOpenAddDialogue}> 
+                <div>
+                    <Dialog open={openAddDialogue} onClose={handleCloseAddDialogue} aria-labelledby="form-dialog-title">
+                        <AddTask 
+                            handleClose= {handleCloseAddDialogue}
+                            updateState= {taskCardsSet}
+                        />
+                    </Dialog>
+
+                    <TaskPanel> 
+                        {
+                            taskCards.map(taskCard => taskCard)
+                        }
+                    </TaskPanel>    
+                </div>   
+            </NavDraw>
+            {/* <NavBar/>
             <Button 
                 color= "primary"
                 onClick= {handleOpenAddDialogue} 
@@ -88,7 +107,7 @@ const Home = () => {
                         taskCards.map(taskCard => taskCard)
                     }
                 </TaskPanel>    
-            </div>
+            </div> */}
         </div>
     )
 }
