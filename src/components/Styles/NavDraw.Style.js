@@ -1,8 +1,7 @@
 import { makeStyles} from '@material-ui/core/styles';
 import Colors from '../Shared/Colors';
+import {DrawerWidth} from '../Shared/CONST'
 
-
-const drawerWidth = '15vw';
 const drawerZIndex = 0;
 
 const Styles = makeStyles((theme) => ({
@@ -34,14 +33,14 @@ const Styles = makeStyles((theme) => ({
     },
 
     drawer: {
-        width: drawerWidth,
+        width: DrawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
         zIndex: drawerZIndex,
     },
 
     drawerOpen: {
-        width: drawerWidth,
+        width: DrawerWidth,
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
